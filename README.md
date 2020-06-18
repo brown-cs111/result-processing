@@ -4,8 +4,8 @@ This script converts our autograder output into the format that Gradescope expec
 Each assignment branch of the `pyret-assignments` repository needs a unique file named `points.json` in the following format:
 ```
 {
-    functionality: Map<string, number>,
-    testing: Map<string, number>
+    "functionality": Map<string, number>,
+    "testing": Map<string, number>
 }
 ```
 For the functionality map, a key should be the name of a check block and the value should be the score value of that check block. \
