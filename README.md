@@ -1,7 +1,6 @@
 # result-processing
 This script converts our autograder output into the format that Gradescope expects.
 
-## Example Setup
 Each assignment branch of the `pyret-assignments` repository needs a unique file named `points.json` in the following format:
 ```
 {
@@ -11,6 +10,8 @@ Each assignment branch of the `pyret-assignments` repository needs a unique file
 ```
 For the functionality map, a key should be the name of a check block and the value should be the score value of that check block.
 For the testing map, a key should be the file name of a wheat/chaff and the value should be the score value of that wheat/chaff.
+
+## Example Setup
 
 For example, for the following TA test suite `ta-tests.arr`:
 ```
