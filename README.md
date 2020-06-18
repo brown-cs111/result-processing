@@ -8,8 +8,8 @@ Each assignment branch of the `pyret-assignments` repository needs a unique file
     testing: Map<string, number>
 }
 ```
-For the functionality map, a key should be the name of a check block and the value should be the score value of that check block.
-For the testing map, a key should be the file name of a wheat/chaff and the value should be the score value of that wheat/chaff.
+For the functionality map, a key should be the name of a check block and the value should be the score value of that check block. \
+For the testing map, a key should be the file name of a wheat/chaff and the value should be the score value of that wheat/chaff (if wheats/chaffs are not used to grade the assignment, leave an empty map for testing and make sure the wheats/chaffs are not included in the assignment's respective `pyret-assignments` branch).
 
 ## Example Setup
 
