@@ -35,12 +35,12 @@ file-system/chaff2.arr
 one such ```points.json``` file could look like the following:
 ```
 {
-    functionality: {
+    "functionality": {
         "MyCheck1": 5,
         "MyCheck2": 10
     },
 
-    testing: {
+    "testing": {
         "wheat1.arr": 3,
         "wheat2.arr": 4,
         "chaff1.arr": 8,
