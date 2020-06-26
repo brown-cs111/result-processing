@@ -12,6 +12,8 @@ For the functionality map, a key should be the name of a check block and the val
 
 For the testing map, a key should be the file name of a wheat/chaff and the value should be the score value of that wheat/chaff (if wheats/chaffs are not used to grade the assignment, leave an empty map for testing and make sure the wheats/chaffs are not included in the assignment's respective `pyret-assignments` branch).
 
+NOTE: The result processing script is writting in TypeScript, so for it to parse a Map from the `points.json` file, the Map must be an iterable object. In the following example, we use an array of arrays, where each inner array represents a key-value pair.
+
 ## Example Setup
 
 For example, for the following TA test suite `ta-tests.arr`:
@@ -36,16 +38,16 @@ file-system/chaff2.arr
 one such ```points.json``` file could look like the following:
 ```
 {
-    "functionality": {
-        "MyCheck1": 5,
-        "MyCheck2": 10
-    },
+    "functionality": [
+        ["MyCheck1", 5],
+        ["MyCheck2", 10]
+    ],
 
-    "testing": {
-        "wheat1.arr": 3,
-        "wheat2.arr": 4,
-        "chaff1.arr": 8,
-        "chaff2.arr": 1
-    }
+    "testing": [
+        ["wheat1.arr", 3],
+        ["wheat2.arr", 4],
+        ["chaff1.arr", 8],
+        ["chaff2.arr", 1]
+    ]
 }
 ```
