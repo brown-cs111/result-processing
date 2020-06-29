@@ -1,4 +1,9 @@
 
+/*
+    An edited version for cs111; search "tdelv" for changes.
+*/
+
+
 /********************\
 ***** Data Types *****
 \********************/
@@ -184,7 +189,7 @@ function get_loc_name(loc: string): string {
 
 // Generate student reports
 
-/*
+/* Edited by tdelv
     Generates a functionality report(s); 
     If test file errors, returns a single report with 0/1 and error;
     Otherwise, return report for each block, each out of 1
@@ -192,7 +197,7 @@ function get_loc_name(loc: string): string {
     Inputs: The `test_result` of a single test suite
     Outputs: A list of reports for each block
 */
-function generate_functionality_report(test_result: Evaluation): GradescopeTestReport[] {
+function generate_functionality_report(test_result: Evaluation, point_values: Map<string, number>): GradescopeTestReport[] {
     let result: Result = test_result.result;
 
     // If errors, 0 functionality and provide error reason
@@ -212,13 +217,15 @@ function generate_functionality_report(test_result: Evaluation): GradescopeTestR
 
     let block: TestBlock;
     for (block of result.Ok) {
+        let points = point_values.has(block.name) ? point_values.get(block.name) : 1;
+
         let report: GradescopeTestReport;
         if (block.error) {
             // If the block errors, then failed block
             report = {
                     name: block.name,
                     score: 0,
-                    max_score: 0,
+                    max_score: points,
                     output: "Block errored.",
                     visibility: "after_published"
                 };
@@ -228,8 +235,8 @@ function generate_functionality_report(test_result: Evaluation): GradescopeTestR
             let passed_tests: number = block.tests.filter(test => test.passed).length;
             report = {
                     name: block.name,
-                    score: passed_tests === total_tests ? 1 : 0,
-                    max_score: 0,
+                    score: passed_tests === total_tests ? points : 0,
+                    max_score: points,
                     output: passed_tests === total_tests 
                         ? `Passed all ${total_tests} tests in this block!`
                         : `Missing ${total_tests - passed_tests} tests in this block`,
@@ -499,6 +506,7 @@ function main() {
     ** Generating reports
     */
 
+    /* Edited by tdelv
     // Generate student reports
 
     // Functionality
@@ -544,6 +552,15 @@ function main() {
     // Generate overall report
 
     let all_reports: GradescopeTestReport[] = [].concat(student_reports, ta_reports)
+
+    let gradescope_report: GradescopeReport = generate_overall_report(all_reports);
+    */
+
+    let functionality_reports: GradescopeTestReport[][] =
+        test_results.map(result => 
+            generate_functionality_report(result, point_values.functionality))
+
+    let all_reports: GradescopeTestReport[] = [].concat(...functionality_reports)
 
     let gradescope_report: GradescopeReport = generate_overall_report(all_reports);
 
