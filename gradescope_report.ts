@@ -254,7 +254,7 @@ function generate_functionality_report(test_result: Evaluation, point_values: Ma
                     output: passed_tests === total_tests 
                         ? `Passed all ${total_tests} tests in this block!`
                         : `Missing ${total_tests - passed_tests} tests in this block`,
-                    visibility: "after_published"
+                    visibility: passed_tests === total_tests ? "hidden" : "after_published"
                 };
         }
 
@@ -495,6 +495,28 @@ function generate_overall_report(
         };
 }
 
+/* added by tdelv
+    Generates a suite report with all-or-nothing scoring, 
+    with the suite having a value from point_values.
+
+*/
+function generate_suite_report(
+        result: Evaluation, 
+        functionality_reports: GradescopeTestReport[], 
+        point_values: Map<string, number>): GradescopeTestReport {
+    let name: string = get_file_name(result.tests);
+    let possible_score: number = point_values.get(name);
+    let total_score: number = functionality_reports.some(report => report.score === 0) ? 0 : possible_score;
+
+    return {
+            name: "Score for " + name,
+            score: total_score,
+            max_score: possible_score,
+            output: total_score > 0 ? "All tests passed!" : "Some test failed.",
+            visibility: "after_published"
+        };
+}
+
 
 function main() {
 
@@ -574,7 +596,11 @@ function main() {
         test_results.map(result => 
             generate_functionality_report(result, point_values.functionality))
 
-    let all_reports: GradescopeTestReport[] = [].concat(...functionality_reports)
+    let suite_reports: GradescopeTestReport[] =
+        test_results.map((result, i) =>
+            generate_suite_report(result, functionality_reports[i], point_values.functionality));
+
+    let all_reports: GradescopeTestReport[] = [].concat(...functionality_reports, suite_reports)
 
     let gradescope_report: GradescopeReport = generate_overall_report(all_reports);
 
