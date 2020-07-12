@@ -14,6 +14,29 @@ For the testing map, a key should be the file name of a wheat/chaff and the valu
 
 ## Example Setup
 
+### Current Setup
+
+With the move to all-or-nothing grading per problem/assignment, you now should specify the point value of a particular test suite instead of individual tests. E.g.:
+
+- `<assignment>/`
+  - `<assignment>/instructors/`
+    - `<assignment>/instructors/tests/`
+      - `<assignment>/instructors/tests/ta-tests1.arr` (filled with multiple tests)
+      - `<assignment>/instructors/tests/ta-tests1.arr` (filled with multiple tests)
+  - `<assignment>/points.json`:
+```
+{
+    "functionality": {
+        "ta-tests1.arr": 8,
+        "ta-tests2.arr": 4
+    },
+
+    "testing": {}
+}
+```
+
+### Old Setup
+~~
 For example, for the following TA test suite `ta-tests.arr`:
 ```
 check "MyCheck1":
@@ -49,3 +72,4 @@ one such ```points.json``` file could look like the following:
     }
 }
 ```
+~~

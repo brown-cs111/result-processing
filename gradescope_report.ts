@@ -54,6 +54,7 @@ interface GradescopeReport {
     visibility: string;
     stdout_visibility: string;
     tests: GradescopeTestReport[];
+    score?: number;
 }
 
 interface GradescopeTestReport {
@@ -487,11 +488,16 @@ function generate_score_report(
     Outputs: The overall Gradescope report
 */
 function generate_overall_report(
-        all_reports: GradescopeTestReport[]): GradescopeReport {
+        all_reports: GradescopeTestReport[],
+        suite_reports: GradescopeTestReport[]): GradescopeReport {
+    let total_score: number = suite_reports.map(report => report.score)
+                                           .reduce((a, b) => a + b, 0);
+
     return {
             visibility: "after_published",
             stdout_visibility: "after_published",
             tests: all_reports,
+            score: total_score
         };
 }
 
@@ -602,7 +608,7 @@ function main() {
 
     let all_reports: GradescopeTestReport[] = [].concat(...functionality_reports, suite_reports)
 
-    let gradescope_report: GradescopeReport = generate_overall_report(all_reports);
+    let gradescope_report: GradescopeReport = generate_overall_report(all_reports, suite_reports);
 
 
     /*
