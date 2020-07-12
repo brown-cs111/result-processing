@@ -36,7 +36,6 @@ With the move to all-or-nothing grading per problem/assignment, you now should s
 ```
 
 ### Old Setup
-~~
 For example, for the following TA test suite `ta-tests.arr`:
 ```
 check "MyCheck1":
@@ -72,4 +71,3 @@ one such ```points.json``` file could look like the following:
     }
 }
 ```
-~~
