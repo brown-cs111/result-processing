@@ -516,7 +516,7 @@ function generate_suite_report(
         functionality_reports: GradescopeTestReport[], 
         point_values: Map<string, number>): GradescopeTestReport {
     let name: string = get_test_file_name(result.tests);
-    let possible_score: number = point_values.get(name);
+    let possible_score: number = point_values.has(name) ? point_values.get(name) : 1;
     let total_score: number = functionality_reports.some(report => report.score === 0) ? 0 : possible_score;
 
     return {
