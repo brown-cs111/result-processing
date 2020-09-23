@@ -227,7 +227,7 @@ function generate_functionality_report(test_result: Evaluation, point_values: Ma
                 score: 0,
                 max_score: 0,
                 output: `Error: ${result.Err}`,
-                visibility: "visible"
+                visibility: "hidden"
             }];
     }
 
@@ -247,7 +247,7 @@ function generate_functionality_report(test_result: Evaluation, point_values: Ma
                     score: 0,
                     max_score: points,
                     output: "Block errored.",
-                    visibility: "after_published"
+                    visibility: "hidden"
                 };
         } else {
             // Otherwise, compare number of passed tests to total number of tests
@@ -260,7 +260,7 @@ function generate_functionality_report(test_result: Evaluation, point_values: Ma
                     output: passed_tests === total_tests 
                         ? `Passed all ${total_tests} tests in this block!`
                         : `Missing ${total_tests - passed_tests} tests in this block`,
-                    visibility: passed_tests === total_tests ? "hidden" : "after_published"
+                    visibility: "hidden"
                 };
         }
 
@@ -351,7 +351,7 @@ function generate_wheat_report(wheat_result: Evaluation): GradescopeTestReport {
             score: (invalid === null) ? 1 : 0,
             max_score: 0,
             output: output,
-            visibility: "after_published"
+            visibility: "hidden"
         }
 }
 
@@ -404,7 +404,7 @@ function generate_chaff_report(wheat_results: Evaluation[]) {
                     score: 1,
                     max_score: 0,
                     output: `Chaff caught; error: ${chaff_result.result.Err}!`,
-                    visibility: "after_published"
+                    visibility: "hidden"
                 };
         } else {
             // Loop through blocks to check if chaff is caught
@@ -417,7 +417,7 @@ function generate_chaff_report(wheat_results: Evaluation[]) {
                             score: 1,
                             max_score: 0,
                             output: `Chaff caught; error in block ${block.name}!`,
-                            visibility: "after_published"
+                            visibility: "hidden"
                         }
                 }
 
@@ -430,7 +430,7 @@ function generate_chaff_report(wheat_results: Evaluation[]) {
                                 score: 1,
                                 max_score: 0,
                                 output: `Chaff caught; test failed in block ${block.name}!`,
-                                visibility: "after_published"
+                                visibility: "hidden"
                             }
                     }
                 }
@@ -442,7 +442,7 @@ function generate_chaff_report(wheat_results: Evaluation[]) {
                     score: 0,
                     max_score: 0,
                     output: `Chaff not caught.`,
-                    visibility: "after_published"
+                    visibility: "hidden"
                 }
         }
     }
@@ -499,8 +499,8 @@ function generate_overall_report(
                                            .reduce((a, b) => a + b, 0);
 
     return {
-            visibility: "after_published",
-            stdout_visibility: "after_published",
+            visibility: "hidden",
+            stdout_visibility: "hidden",
             tests: all_reports,
             score: total_score
         };
@@ -523,7 +523,7 @@ function generate_suite_report(
             score: total_score,
             max_score: possible_score,
             output: total_score > 0 ? "All tests passed!" : "Some test failed.",
-            visibility: "after_published"
+            visibility: "hidden"
         };
 }
 
