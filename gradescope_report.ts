@@ -349,7 +349,7 @@ function generate_wheat_report(wheat_result: Evaluation): GradescopeTestReport {
     return {
             name: get_code_file_name(wheat_result.code),
             score: (invalid === null) ? 1 : 0,
-            max_score: 0,
+            max_score: 1,
             output: output,
             visibility: "hidden"
         }
@@ -415,7 +415,7 @@ function generate_chaff_report(wheat_results: Evaluation[]) {
                     return {
                             name: get_code_file_name(chaff_result.code),
                             score: 1,
-                            max_score: 0,
+                            max_score: 1,
                             output: `Chaff caught; error in block ${block.name}!`,
                             visibility: "hidden"
                         }
@@ -428,7 +428,7 @@ function generate_chaff_report(wheat_results: Evaluation[]) {
                         return {
                                 name: get_code_file_name(chaff_result.code),
                                 score: 1,
-                                max_score: 0,
+                                max_score: 1,
                                 output: `Chaff caught; test failed in block ${block.name}!`,
                                 visibility: "hidden"
                             }
@@ -440,7 +440,7 @@ function generate_chaff_report(wheat_results: Evaluation[]) {
             return {
                     name: get_code_file_name(chaff_result.code),
                     score: 0,
-                    max_score: 0,
+                    max_score: 1,
                     output: `Chaff not caught.`,
                     visibility: "hidden"
                 }
