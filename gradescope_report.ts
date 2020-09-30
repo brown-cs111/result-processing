@@ -609,8 +609,15 @@ function main() {
     let suite_reports: GradescopeTestReport[] =
         test_results.map((result, i) =>
             generate_suite_report(result, functionality_reports[i], point_values.functionality));
+    
+    let wheat_reports: GradescopeTestReport[] =
+        wheat_results.map(generate_wheat_report);
+    
+    let chaff_reports: GradescopeTestReport[] =
+        chaff_results.map(generate_chaff_report(wheat_results));
+    
 
-    let all_reports: GradescopeTestReport[] = [].concat(...functionality_reports, suite_reports)
+    let all_reports: GradescopeTestReport[] = [].concat(...functionality_reports, suite_reports, wheat_reports, chaff_reports)
 
     let gradescope_report: GradescopeReport = generate_overall_report(all_reports, suite_reports);
 
